@@ -14,6 +14,7 @@
 // There are at least two ways to implement this that are both correct. But one
 // is a lot shorter!
 
+//use std::num::IntErrorKind;
 use std::num::ParseIntError;
 
 fn total_cost(item_quantity: &str) -> Result<i32, ParseIntError> {
@@ -22,8 +23,13 @@ fn total_cost(item_quantity: &str) -> Result<i32, ParseIntError> {
 
     // TODO: Handle the error case as described above.
     let qty = item_quantity.parse::<i32>();
-
-    Ok(qty * cost_per_item + processing_fee)
+  //  qty.map_err(|e|e);
+    let number=match qty {
+        Ok(qty)=>qty,
+        Err(e)=>return Err(e)
+    };
+ 
+    Ok(number * cost_per_item + processing_fee)
 }
 
 fn main() {
