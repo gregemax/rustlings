@@ -9,7 +9,7 @@ use std::{
 };
 
 fn main() {
-    let mut handles = Vec::new();
+    let mut handles  = Vec::new();
     for i in 0..10 {
         let handle = thread::spawn(move || {
             let start = Instant::now();
@@ -24,6 +24,8 @@ fn main() {
     for handle in handles {
         // TODO: Collect the results of all threads into the `results` vector.
         // Use the `JoinHandle` struct which is returned by `thread::spawn`.
+        //handle.join().unwrap();
+        results.push(handle.join().unwrap());
     }
 
     if results.len() != 10 {
